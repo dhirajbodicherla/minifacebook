@@ -182,6 +182,7 @@ $(document).ready(function() {
         var miniScreenLeft = $window.width() - 380;
         var miniScreenWidth = 310;
         var videoSrc = originalVideo.src;
+        var miniVideoStartFrom = 0;
 
         if (miniScreenLastTop && miniScreenLastHeight && 
             miniScreenLastLeft && miniScreenLastWidth &&
@@ -198,6 +199,8 @@ $(document).ready(function() {
         $miniScreen.css('left', miniScreenLeft);
         $miniScreen.height(miniScreenHeight);
         $miniScreen.width(miniScreenWidth);
+
+        miniVideoStartFrom = originalVideo.currentTime;
 
         if(videoSrc.match('blob:')){
             var flashvars = originalVideo.getElementsByTagName('embed')[0].getAttribute('flashvars');
@@ -218,6 +221,10 @@ $(document).ready(function() {
 
         // Bind the time update event to the video
         $newVideo.bind('timeupdate', updateTime);
+
+        $newVideo[0].addEventListener('loadedmetadata', function(){
+            this.currentTime = miniVideoStartFrom;
+        }, false);
 
         // 5. Append the video into the mini facebook div
         $miniScreen.append($newVideo);
