@@ -202,7 +202,11 @@ $(document).ready(function() {
         if(videoSrc.match('blob:')){
             var flashvars = originalVideo.getElementsByTagName('embed')[0].getAttribute('flashvars');
             var params = JSON.parse(Util.getJsonFromUrl(flashvars).params);
+            // First set to hd_src
             videoSrc = params.video_data.progressive[0].hd_src;
+            // If not available, then set to sd_src
+            if (!videoSrc)
+                videoSrc = params.video_data.progressive[0].sd_src;
         }
 
         // 4. Create a video tag with the video url
@@ -317,10 +321,6 @@ $(document).ready(function() {
         $('.mnfb-progress-wrap').height(1);
         $('.mnfb-progress-bar').height(1);
         $('.mnfb-progress-pointer').hide();
-    }
-
-    function handlePlayPause(){
-        toggleVideo();
     }
 
     function handleVideoProgress(e) {
