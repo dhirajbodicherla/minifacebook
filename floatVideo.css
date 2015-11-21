@@ -51,6 +51,10 @@
 
 .mnfb-play-button-pause {
   display: none;
+  opacity: 0.5;
+}
+.mnfb-play-button:hover .mnfb-play-button-pause{
+  opacity: 1;
 }
 
 .mnfb-play-button-pause:before {
@@ -213,6 +217,8 @@
   font-weight: bold;
   text-decoration: none;
   color:#ffffff;
+
+  opacity: 0.5;
 }
 
 #mnfb-play-button{
@@ -225,6 +231,7 @@
 
 .mnfb-size-button:hover {
   background-color: #3b5998;
+  opacity: 1;
 }
 
 .mnfb-pin-label {
